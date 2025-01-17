@@ -1,4 +1,4 @@
-@extends('admin.layouts.index')
+@extends('layouts.panel')
 
 @section('title', __('Страны'))
 
@@ -15,7 +15,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <a href="{{ route('admin.countries.create') }}" class="btn btn-success" title="{{ __('Добавить') }}">
+                            <a href="{{ route('admin.countries.create') }}" class="btn btn-success"
+                               title="{{ __('Добавить') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i> {{ __('Добавить') }}
                             </a>
                         </div>
@@ -35,25 +36,33 @@
                                     <tr>
                                         <td>{{ $country->id }}</td>
                                         <td>{{ $country->name }}</td>
-                                            <td>
-                                                <a href="{{ route('admin.countries.show', $country) }}" class="btn btn-info btn-sm mb-2" title="{{ __('Просмотр') }}">
-                                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('admin.cities.index', $country) }}" class="btn btn-warning btn-sm mb-2 " title="{{ __('Просмотр городов') }}">
-                                                    <i class="fa fa-city" aria-hidden="true"></i>
-                                                </a>
+                                        <td>
+                                            <a href="{{ route('admin.countries.show', $country) }}"
+                                               class="btn btn-info btn-sm mb-2" title="{{ __('Просмотр') }}">
+                                                <i class="fa fa-eye" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="{{ route('admin.cities.index', $country) }}"
+                                               class="btn btn-warning btn-sm mb-2 "
+                                               title="{{ __('Просмотр городов') }}">
+                                                <i class="fa fa-city" aria-hidden="true"></i>
+                                            </a>
 
-                                                <a href="{{ route('admin.countries.edit', $country) }}" class="btn btn-primary btn-sm mb-2" title="{{ __('Редактировать') }}">
-                                                    <i class="fa fa-fw fa-edit" aria-hidden="true"></i>
-                                                </a>
-                                                <form method="POST" action="{{ route('admin.countries.destroy', $country) }}" accept-charset="UTF-8" style="display:inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm mb-2" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Подтвердите удаление этой страны?') }}')">
-                                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
+                                            <a href="{{ route('admin.countries.edit', $country) }}"
+                                               class="btn btn-primary btn-sm mb-2" title="{{ __('Редактировать') }}">
+                                                <i class="fa fa-fw fa-edit" aria-hidden="true"></i>
+                                            </a>
+                                            <form method="POST"
+                                                  action="{{ route('admin.countries.destroy', $country) }}"
+                                                  accept-charset="UTF-8" style="display:inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm mb-2"
+                                                        title="{{ __('Удалить') }}"
+                                                        onclick="return confirm('{{ __('Подтвердите удаление этой страны?') }}')">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>

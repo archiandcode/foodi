@@ -1,4 +1,4 @@
-@extends('admin.layouts.index')
+@extends('layouts.panel')
 
 @section('title', __('Просмотр ресторана'))
 
@@ -13,10 +13,12 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <a href="{{ route('admin.restaurants.index') }}" class="btn btn-warning" title="{{ __('Назад') }}">
+                        <a href="{{ route('admin.restaurants.index') }}" class="btn btn-warning"
+                           title="{{ __('Назад') }}">
                             <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ __('Назад') }}
                         </a>
-                        <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-primary" title="{{ __('Редактировать') }}">
+                        <a href="{{ route('admin.restaurants.edit', $restaurant) }}" class="btn btn-primary"
+                           title="{{ __('Редактировать') }}">
                             <i class="fa fa-fw fa-edit" aria-hidden="true"></i> {{ __('Редактировать') }}
                         </a>
                     </div>
@@ -41,7 +43,8 @@
                                     <th>{{ __('Логотип') }}</th>
                                     <td>
                                         @if($restaurant->logo)
-                                            <img src="{{ asset('storage/' . $restaurant->logo) }}" height="80" alt="logo">
+                                            <img src="{{ asset('storage/' . $restaurant->logo) }}" height="80"
+                                                 alt="logo">
                                         @endif
                                     </td>
                                 </tr>
@@ -49,7 +52,8 @@
                                     <th>{{ __('Баннер') }}</th>
                                     <td>
                                         @if($restaurant->banner)
-                                            <img src="{{ asset('storage/' . $restaurant->banner) }}" height="120" alt="banner">
+                                            <img src="{{ asset('storage/' . $restaurant->banner) }}" height="120"
+                                                 alt="banner">
                                         @endif
                                     </td>
                                 </tr>
@@ -68,7 +72,8 @@
 
                     <div class="card-footer">
                         @if(!$restaurant->is_accepted)
-                        <form method="POST" action="{{ route('admin.restaurants.accept', $restaurant) }}" style="display:inline">
+                            <form method="POST" action="{{ route('admin.restaurants.accept', $restaurant) }}"
+                                  style="display:inline">
                                 @csrf
                                 <button type="submit" class="btn btn-success" title="{{ __('Принять') }}"
                                         onclick="return confirm('{{ __('Вы уверены, что хотите принять этот ресторан?') }}')">
@@ -76,7 +81,8 @@
                                 </button>
                             </form>
 
-                            <form method="POST" action="{{ route('admin.restaurants.reject', $restaurant) }}" style="display:inline">
+                            <form method="POST" action="{{ route('admin.restaurants.reject', $restaurant) }}"
+                                  style="display:inline">
                                 @csrf
                                 <button type="submit" class="btn btn-secondary" title="{{ __('Отклонить') }}"
                                         onclick="return confirm('{{ __('Вы уверены, что хотите отклонить этот ресторан?') }}')">
@@ -86,7 +92,8 @@
                         @endif
 
                         @if($restaurant->is_accepted)
-                            <form method="POST" action="{{ route('admin.restaurants.ban', $restaurant) }}" style="display:inline">
+                            <form method="POST" action="{{ route('admin.restaurants.ban', $restaurant) }}"
+                                  style="display:inline">
                                 @csrf
                                 <button type="submit" class="btn btn-danger" title="{{ __('Удалить') }}"
                                         onclick="return confirm('{{ __('Вы уверены, что хотите удалить (забанить) этот ресторан?') }}')">

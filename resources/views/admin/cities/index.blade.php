@@ -1,4 +1,4 @@
-@extends('admin.layouts.index')
+@extends('layouts.panel')
 
 @section('title', __('Города'))
 
@@ -15,10 +15,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <a href="{{ route('admin.countries.index') }}" class="btn btn-warning" title="{{ __('Назад') }}">
+                            <a href="{{ route('admin.countries.index') }}" class="btn btn-warning"
+                               title="{{ __('Назад') }}">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ __('Назад') }}
                             </a>
-                            <a href="{{ route('admin.cities.create', ['country' => $country]) }}" class="btn btn-success" title="{{ __('Добавить') }}">
+                            <a href="{{ route('admin.cities.create', ['country' => $country]) }}"
+                               class="btn btn-success" title="{{ __('Добавить') }}">
                                 <i class="fa fa-plus" aria-hidden="true"></i> {{ __('Добавить') }}
                             </a>
                         </div>
@@ -39,16 +41,22 @@
                                         <td>{{ $city->id }}</td>
                                         <td>{{ $city->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.cities.show', [$country, $city]) }}" class="btn btn-info btn-sm mb-2" title="{{ __('Просмотр') }}">
+                                            <a href="{{ route('admin.cities.show', [$country, $city]) }}"
+                                               class="btn btn-info btn-sm mb-2" title="{{ __('Просмотр') }}">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
-                                            <a href="{{ route('admin.cities.edit', [$country, $city]) }}" class="btn btn-primary btn-sm mb-2" title="{{ __('Редактировать') }}">
+                                            <a href="{{ route('admin.cities.edit', [$country, $city]) }}"
+                                               class="btn btn-primary btn-sm mb-2" title="{{ __('Редактировать') }}">
                                                 <i class="fa fa-fw fa-edit" aria-hidden="true"></i>
                                             </a>
-                                            <form method="POST" action="{{ route('admin.cities.destroy', [$country, $city]) }}" accept-charset="UTF-8" style="display:inline">
+                                            <form method="POST"
+                                                  action="{{ route('admin.cities.destroy', [$country, $city]) }}"
+                                                  accept-charset="UTF-8" style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm mb-2" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Подтвердите удаление этого города?') }}')">
+                                                <button type="submit" class="btn btn-danger btn-sm mb-2"
+                                                        title="{{ __('Удалить') }}"
+                                                        onclick="return confirm('{{ __('Подтвердите удаление этого города?') }}')">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </form>
@@ -71,9 +79,9 @@
                                 </tfoot>
                             </table>
                             <div class="pagination-wrapper">
-{{--                                @if(is_object($cities))--}}
-{{--                                    {!! $cities->links('admin._components.pagination') !!}--}}
-{{--                                @endif--}}
+                                {{--                                @if(is_object($cities))--}}
+                                {{--                                    {!! $cities->links('admin._components.pagination') !!}--}}
+                                {{--                                @endif--}}
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.index')
+@extends('layouts.panel')
 
 @section('title', __('Просмотр страны'))
 
@@ -13,16 +13,20 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <a href="{{ route('admin.countries.index') }}" class="btn btn-warning" title="{{ __('Назад') }}">
+                            <a href="{{ route('admin.countries.index') }}" class="btn btn-warning"
+                               title="{{ __('Назад') }}">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i> {{ __('Назад') }}
                             </a>
-                            <a href="{{ route('admin.countries.edit', $country) }}" class="btn btn-primary" title="{{ __('Редактировать') }}">
+                            <a href="{{ route('admin.countries.edit', $country) }}" class="btn btn-primary"
+                               title="{{ __('Редактировать') }}">
                                 <i class="fa fa-fw fa-edit" aria-hidden="true"></i> {{ __('Редактировать') }}
                             </a>
-                            <form method="POST" action="{{ route('admin.countries.destroy', $country) }}" accept-charset="UTF-8" style="display:inline">
+                            <form method="POST" action="{{ route('admin.countries.destroy', $country) }}"
+                                  accept-charset="UTF-8" style="display:inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" title="{{ __('Удалить') }}" onclick="return confirm('{{ __('Вы уверены, что хотите удалить эту страну?') }}')">
+                                <button type="submit" class="btn btn-danger" title="{{ __('Удалить') }}"
+                                        onclick="return confirm('{{ __('Вы уверены, что хотите удалить эту страну?') }}')">
                                     <i class="fa fa-trash" aria-hidden="true"></i> {{ __('Удалить') }}
                                 </button>
                             </form>
