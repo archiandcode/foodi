@@ -19,12 +19,12 @@ class CityController extends Controller
     public function index(Country $country): View
     {
         $cities = $country->cities()->get();
-        return view('admin.cities.index', compact('cities'));
+        return view('admin.cities.index', compact('cities', 'country'));
     }
 
-    public function show(City $city): View
+    public function show(Country $country, City $city): View
     {
-        return view('admin.cities.show', compact('city'));
+        return view('admin.cities.show', compact('city', 'country'));
     }
 
     public function create(Country $country): View
@@ -32,9 +32,9 @@ class CityController extends Controller
         return view('admin.cities.create', compact('country'));
     }
 
-    public function edit(City $city): View
+    public function edit(Country $country, City $city): View
     {
-        return view('admin.cities.edit', compact('city'));
+        return view('admin.cities.edit', compact('city', 'country'));
     }
 
     public function store(CityRequest $request, Country $country): RedirectResponse
@@ -47,5 +47,11 @@ class CityController extends Controller
     {
         $city->update($request->validated());
         return redirect()->route('admin.cities.index', $country);
+    }
+
+    public function destroy(Country $country, City $city): RedirectResponse
+    {
+        $city->delete();
+        return back()->with('success', __('success'));
     }
 }
