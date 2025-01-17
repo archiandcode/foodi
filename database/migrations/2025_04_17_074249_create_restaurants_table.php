@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('logo');
             $table->string('banner')->nullable();
 
+            $table->boolean('is_banned')->default(false);
+            $table->boolean('is_accepted')->default(false);
             $table->foreignId('owner_id')->nullable()->constrained('staff_users')->nullOnDelete();
             $table->timestamps();
         });
