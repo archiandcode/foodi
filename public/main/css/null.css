@@ -1,0 +1,63 @@
+/* null.css – сброс всех базовых стилей */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    background: transparent;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, main, nav, section, summary {
+    display: block;
+}
+
+/* Remove list styles */
+ul, ol {
+    list-style: none;
+}
+
+/* Remove link styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Remove image border and make it block */
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-style: none;
+}
+
+/* Remove quotes from blockquote and q */
+blockquote, q {
+    quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: '';
+}
+
+/* Table reset */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Form element reset */
+input, button, textarea, select {
+    font: inherit;
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+}

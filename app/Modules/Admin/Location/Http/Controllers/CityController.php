@@ -18,39 +18,46 @@ class CityController extends Controller
 
     public function index(Country $country): View
     {
+        $this->authorize('viewAny', City::class);
         $cities = $country->cities()->get();
-        return view('admin.cities.index', compact('cities', 'country'));
+        return view('panel.cities.index', compact('cities', 'country'));
     }
 
     public function show(Country $country, City $city): View
     {
-        return view('admin.cities.show', compact('city', 'country'));
+        $this->authorize('view', $city);
+        return view('panel.cities.show', compact('city', 'country'));
     }
 
     public function create(Country $country): View
     {
-        return view('admin.cities.create', compact('country'));
+        $this->authorize('create', City::class);
+        return view('panel.cities.create', compact('country'));
     }
 
     public function edit(Country $country, City $city): View
     {
-        return view('admin.cities.edit', compact('city', 'country'));
+        $this->authorize('update', $city);
+        return view('panel.cities.edit', compact('city', 'country'));
     }
 
     public function store(CityRequest $request, Country $country): RedirectResponse
     {
+        $this->authorize('create', City::class);
         $country->cities()->create($request->validated());
         return redirect()->route('admin.cities.index', $country);
     }
 
     public function update(City $city, CityRequest $request, Country $country): RedirectResponse
     {
+        $this->authorize('update', $city);
         $city->update($request->validated());
         return redirect()->route('admin.cities.index', $country);
     }
 
     public function destroy(Country $country, City $city): RedirectResponse
     {
+        $this->authorize('delete', $city);
         $city->delete();
         return back()->with('success', __('success'));
     }

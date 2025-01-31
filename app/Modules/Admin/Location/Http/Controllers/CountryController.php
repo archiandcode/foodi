@@ -17,39 +17,53 @@ class CountryController extends Controller
 
     public function index(): View
     {
+        $this->authorize('viewAny', Country::class);
+
         $countries = Country::all();
-        return view('admin.countries.index', compact('countries'));
+        return view('panel.countries.index', compact('countries'));
     }
 
     public function show(Country $country): View
     {
-        return view('admin.countries.show', compact('country'));
+        $this->authorize('view', $country);
+
+        return view('panel.countries.show', compact('country'));
     }
 
     public function create(): View
     {
-        return view('admin.countries.create');
+        $this->authorize('create', Country::class);
+
+        return view('panel.countries.create');
     }
 
     public function edit(Country $country): View
     {
-        return view('admin.countries.edit', compact('country'));
+        $this->authorize('update', $country);
+
+        return view('panel.countries.edit', compact('country'));
     }
 
     public function store(CountryRequest $request): RedirectResponse
     {
+        $this->authorize('create', Country::class);
+
         Country::query()->create($request->validated());
         return redirect()->route('admin.countries.index');
     }
 
     public function update(Country $country, CountryRequest $request): RedirectResponse
     {
+        $this->authorize('update', $country);
+
         $country->update($request->validated());
         return redirect()->route('admin.countries.index');
     }
 
     public function destroy(Country $country): RedirectResponse
     {
+        $this->authorize('delete', $country);
+
         $country->delete();
         return redirect()->route('admin.countries.index');
     }

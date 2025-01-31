@@ -17,11 +17,11 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    @include('includes.navbar')
+    @include('panel.includes.navbar')
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    @include('includes.sidebar')
+    @include('panel.includes.sidebar')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -49,8 +49,9 @@
     <!-- /.content-wrapper -->
 
 </div>
-<!-- ./wrapper -->
 
+
+<!-- ./wrapper -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 <script>
@@ -61,5 +62,7 @@
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+
+
 </body>
 </html>

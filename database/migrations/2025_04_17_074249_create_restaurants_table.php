@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
-            $table->string('logo');
+            $table->text('description')->nullable();
+            $table->string('logo')->nullable();
             $table->string('banner')->nullable();
+            $table->string('bin');
+            $table->string('website')->nullable();
 
             $table->boolean('is_banned')->default(false);
-            $table->boolean('is_accepted')->default(false);
-            $table->foreignId('owner_id')->nullable()->constrained('staff_users')->nullOnDelete();
             $table->timestamps();
         });
     }

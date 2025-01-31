@@ -14,16 +14,16 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware('web')
                 ->prefix('admin')
                 ->name('admin.')
-                ->group(base_path('routes/admin.php'));
-
-            Route::middleware('web')
-                ->prefix('restaurant-panel')
-                ->name('restaurant-panel.')
-                ->group(base_path('routes/restaurant-panel.php'));
+                ->group(base_path('routes/panel.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->redirectGuestsTo(function () {
+            if (request()->is('admin/*')) {
+                return route('admin.login.form');
+            }
+            return route('login.form');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -1,0 +1,548 @@
+/* ===== BASE ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 16px;
+    box-sizing: border-box;
+}
+/* ===== NAVBAR ===== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+    height: 72px;
+}
+
+.navbar__logo {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.navbar__login {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.navbar__login button {
+    background-color: #eee;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 14px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* ===== SEARCH (desktop + mobile variants) ===== */
+
+/* Поиск в navbar по умолчанию (десктоп) */
+.navbar__search--desktop {
+    display: flex;
+}
+
+/* Поиск под navbar (мобайл) */
+.navbar__search--mobile {
+    display: none;
+}
+
+/* Контейнер под мобильный поиск */
+.navbar__search-wrapper {
+    display: none;
+    padding: 16px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+/* Общий стиль поиска */
+.navbar__search {
+    display: flex;
+    border: 1.5px solid #ffd700;
+    border-radius: 28px;
+    overflow: hidden;
+    max-width: 500px;
+    width: 100%;
+}
+
+.navbar__search input {
+    border: none;
+    padding: 10px 16px;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.navbar__search button {
+    background-color: #ffd700;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ===== PAGE TITLE ===== */
+.title {
+    font-size: 28px;
+    text-align: center;
+    /* margin: 24px 0; */
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+/* ===== GRID ===== */
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0 24px 24px;
+}
+
+/* ===== RESTAURANT CARD ===== */
+.restaurant-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-4px);
+}
+
+.restaurant-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.restaurant-info {
+    padding: 12px;
+}
+
+.restaurant-info h2 {
+    margin: 0 0 4px;
+    font-size: 18px;
+}
+
+/* ===== LABELS ===== */
+.label {
+    display: inline-block;
+    background: #e5f9e7;
+    color: #2d7a46;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+.label.green {
+    background: #d8f0ff;
+    color: #1a73e8;
+}
+
+/* ===== RESPONSIVE (mobile < 769px) ===== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 12px 16px;
+    }
+
+    .navbar__logo {
+        font-size: 24px;
+    }
+
+    .navbar__login button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .navbar__search--desktop {
+        display: none;
+    }
+
+    .navbar__search-wrapper {
+        display: block;
+        padding: 12px 16px;
+    }
+
+    .navbar__search--mobile {
+        display: flex;
+    }
+
+    .navbar__search {
+        width: 100%;
+    }
+
+    .navbar__search input {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .navbar__search button {
+        padding: 10px 16px;
+        font-size: 15px;
+    }
+}
+
+/* ===== AUTH PAGES ===== */
+.auth-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.auth-form input {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 16px;
+}
+
+.auth-form button {
+    padding: 12px 16px;
+    font-size: 16px;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #f2c800;
+}
+
+/* Кнопка-ссылка */
+.btn-light {
+    background-color: #eee;
+    padding: 10px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 15px;
+    transition: background-color 0.3s;
+}
+
+.btn-light:hover {
+    background-color: #ddd;
+}
+/* ===== AUTH CENTERING ===== */
+.auth-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Ставим чуть выше, а не строго по центру */
+    min-height: calc(100vh - 72px); /* Учитываем navbar */
+    padding: 48px 24px 24px;
+    background-color: #f9f9f9;
+}
+
+/* ===== RESTAURANT PAGE LAYOUT ===== */
+.restaurant-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr 300px;
+    gap: 32px;
+    padding: 32px;
+    background: #f9f9f9;
+}
+
+/* Sidebar */
+.restaurant-sidebar {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    height: fit-content;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.category-nav h3 {
+    margin-bottom: 12px;
+}
+
+.category-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-nav li {
+    padding: 10px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.category-nav li:hover,
+.category-nav .active {
+    background: #f0f0f0;
+}
+
+/* Hero */
+.restaurant-hero {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.restaurant-hero img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 16px;
+    left: 24px;
+    color: white;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.hero-overlay h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.hero-tags {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+    font-size: 14px;
+    background: rgba(0,0,0,0.4);
+    padding: 8px 12px;
+    border-radius: 12px;
+}
+
+/* Products */
+.product-section {
+    margin-top: 32px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: #fff;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.product-card h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.product-card p {
+    font-size: 14px;
+    color: #666;
+}
+
+.product-card strong {
+    display: block;
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.product-card button {
+    padding: 10px 16px;
+    border: none;
+    background: #ffd700;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ===== CART ===== */
+.cart {
+    position: sticky;
+    top: 32px; /* Было 96px — теперь выше */
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px;
+    max-height: 550px; /* Статическая высота */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Когда корзина пуста */
+.cart-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    text-align: center;
+}
+
+.cart-empty img {
+    width: 64px;
+    margin-bottom: 12px;
+}
+
+.cart-info {
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+}
+/* ===== RESTAURANT REGISTER ===== */
+.restaurant-register-page {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #ffd700;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 24px;
+}
+
+.restaurant-register-form {
+    background-color: #fefefe;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+}
+
+.restaurant-register-form h1 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 24px;
+}
+
+.restaurant-register-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.restaurant-register-form label {
+    font-weight: 500;
+}
+
+
+.restaurant-register-form input,
+.restaurant-register-form textarea,
+.restaurant-register-form select {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+}
+
+.restaurant-register-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+
+.restaurant-register-form button {
+    margin-top: 16px;
+    padding: 14px 20px;
+    background-color: #ffd700;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.restaurant-register-form button:hover {
+    background-color: #f2c800;
+}
+
+.restaurant-register-row
+{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+/* ===== VALIDATION ERROR STYLES ===== */
+
+/* Красная рамка для полей с ошибкой */
+.input-error {
+    border-color: #e53935 !important;
+    background-color: #fff5f5;
+}
+
+/* Сообщение об ошибке */
+.error-message {
+    color: #e53935;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: -5px;
+}
+
+.auth-switch {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.auth-switch a {
+    color: #1a73e8; /* классический синий */
+    text-decoration: none;
+    margin-left: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.auth-switch a:hover {
+    opacity: 0.7;
+}

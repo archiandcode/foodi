@@ -13,27 +13,27 @@ class RestaurantController extends Controller
 {
     public function __construct(
         protected RestaurantService $service
-    ) {}
+    ){}
 
     public function index(): View
     {
         $restaurants = Restaurant::query()->where('is_banned', false)->get();
-        return view('admin.restaurants.index', compact('restaurants'));
+        return view('panel.restaurants.index', compact('restaurants'));
     }
 
     public function show(Restaurant $restaurant): View
     {
-        return view('admin.restaurants.show', compact('restaurant'));
+        return view('panel.restaurants.show', compact('restaurant'));
     }
 
     public function create(): View
     {
-        return view('admin.restaurants.create');
+        return view('panel.restaurants.create');
     }
 
     public function edit(Restaurant $restaurant): View
     {
-        return view('admin.restaurants.edit', compact('restaurant'));
+        return view('panel.restaurants.edit', compact('restaurant'));
     }
 
     public function update(Restaurant $restaurant, RestaurantRequest $request): RedirectResponse
@@ -53,19 +53,6 @@ class RestaurantController extends Controller
     {
         $restaurant->is_banned = false;
         $restaurant->save();
-        return redirect()->route('admin.restaurants.index');
-    }
-
-    public function accept(Restaurant $restaurant): RedirectResponse
-    {
-        $restaurant->is_accepted = true;
-        $restaurant->save();
-        return redirect()->route('admin.restaurants.index');
-    }
-
-    public function reject(Restaurant $restaurant): RedirectResponse
-    {
-        $restaurant->delete();
         return redirect()->route('admin.restaurants.index');
     }
 }
