@@ -7,13 +7,17 @@ use App\Modules\Admin\Location\Models\Country;
 use App\Modules\Admin\Location\Policies\CityPolicy;
 use App\Modules\Admin\Location\Policies\CountryPolicy;
 use App\Modules\Admin\Restaurants\Contracts\ApplicationRepoInterface;
-use App\Modules\Admin\Restaurants\Contracts\RestaurantRepoInterface;
+use App\Modules\Admin\Restaurants\Models\Restaurant;
+use App\Modules\Admin\Restaurants\Policies\ApplicationPolicy;
+use App\Modules\Admin\Restaurants\Policies\RestaurantPolicy;
 use App\Modules\Admin\Restaurants\Repositories\ApplicationRepo;
-use App\Modules\Admin\Restaurants\Repositories\RestaurantRepo;
-use App\Modules\RestaurantPanel\Dishes\Contracts\DishRepoInterface;
-use App\Modules\RestaurantPanel\Dishes\Contracts\MenuCategoryRepoInterface;
-use App\Modules\RestaurantPanel\Dishes\Repositories\DishRepo;
-use App\Modules\RestaurantPanel\Dishes\Repositories\MenuCategoryRepo;
+use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\RestaurantPanel\Restaurant\Contracts\DishRepoInterface;
+use App\Modules\RestaurantPanel\Restaurant\Contracts\MenuCategoryRepoInterface;
+use App\Modules\RestaurantPanel\Restaurant\Repositories\DishRepo;
+use App\Modules\RestaurantPanel\Restaurant\Repositories\MenuCategoryRepo;
+use App\Modules\RestaurantPanel\Restaurant\Contracts\RestaurantRepoInterface;
+use App\Modules\RestaurantPanel\Restaurant\Repositories\RestaurantRepo;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +35,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::policy(City::class, CityPolicy::class);
         Gate::policy(Country::class, CountryPolicy::class);
+        Gate::policy(Restaurant::class, RestaurantPolicy::class);
+        Gate::policy(RestaurantApplication::class, ApplicationPolicy::class);
     }
 }

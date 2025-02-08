@@ -14,7 +14,7 @@
                 <i class="fas fa-user-circle"></i> Профиль
             </a>
             <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <a href="#" class="dropdown-item">
+                <a href="{{ route('admin.profile') }}" class="dropdown-item">
                     <i class="fas fa-user"></i> Личные данные
                 </a>
                 <div class="dropdown-divider"></div>

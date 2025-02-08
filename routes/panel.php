@@ -5,8 +5,10 @@ use App\Modules\Admin\Location\Http\Controllers\CountryController;
 use App\Modules\Admin\Restaurants\Http\Controllers\ApplicationController;
 use App\Modules\Admin\Restaurants\Http\Controllers\RestaurantController;
 use App\Modules\Auth\Http\Controllers\StaffAuthController;
-use App\Modules\RestaurantPanel\Dishes\Http\Controllers\DishController;
-use App\Modules\RestaurantPanel\Dishes\Http\Controllers\MenuCategoryController;
+use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\AddressController;
+use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\DishController;
+use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\MenuCategoryController;
+use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\RestaurantController as MyRestaurantController;
 use App\Modules\StaffUser\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +46,15 @@ Route::middleware('auth:staff')->group(function () {
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name('profile');
         Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
+    });
+
+    Route::prefix('restaurant')->group(function () {
+        Route::get('/', [MyRestaurantController::class, 'index'])->name('restaurant.index');
+        Route::get('/edit', [MyRestaurantController::class, 'edit'])->name('restaurant.edit');
+        Route::put('/', [MyRestaurantController::class, 'update'])->name('restaurant.update');
+    });
+
+    Route::prefix('restaurant')->group(function () {
+        Route::resource('addresses', AddressController::class);
     });
 });

@@ -3,5 +3,5 @@
 @section('title', 'main')
 
 @section('content')
-hello world
+    hello world
 @endsection

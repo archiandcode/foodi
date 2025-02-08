@@ -20,25 +20,25 @@ class CityController extends Controller
     {
         $this->authorize('viewAny', City::class);
         $cities = $country->cities()->get();
-        return view('panel.cities.index', compact('cities', 'country'));
+        return view('panel.admin.cities.index', compact('cities', 'country'));
     }
 
     public function show(Country $country, City $city): View
     {
         $this->authorize('view', $city);
-        return view('panel.cities.show', compact('city', 'country'));
+        return view('panel.admin.cities.show', compact('city', 'country'));
     }
 
     public function create(Country $country): View
     {
         $this->authorize('create', City::class);
-        return view('panel.cities.create', compact('country'));
+        return view('panel.admin.cities.create', compact('country'));
     }
 
     public function edit(Country $country, City $city): View
     {
         $this->authorize('update', $city);
-        return view('panel.cities.edit', compact('city', 'country'));
+        return view('panel.admin.cities.edit', compact('city', 'country'));
     }
 
     public function store(CityRequest $request, Country $country): RedirectResponse

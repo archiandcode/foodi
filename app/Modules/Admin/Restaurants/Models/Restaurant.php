@@ -2,11 +2,11 @@
 
 namespace App\Modules\Admin\Restaurants\Models;
 
-use App\Modules\RestaurantPanel\Dishes\Models\Dish;
-use App\Modules\RestaurantPanel\Dishes\Models\MenuCategory;
+use App\Modules\RestaurantPanel\Restaurant\Models\Dish;
+use App\Modules\RestaurantPanel\Restaurant\Models\MenuCategory;
+use App\Modules\RestaurantPanel\Restaurant\Models\RestaurantAddress;
 use App\Modules\StaffUser\Models\StaffUser;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -47,5 +47,10 @@ class Restaurant extends Model
     public function users(): HasMany
     {
         return $this->hasMany(StaffUser::class);
+    }
+
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(RestaurantAddress::class);
     }
 }

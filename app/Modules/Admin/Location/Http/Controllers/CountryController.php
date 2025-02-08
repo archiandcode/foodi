@@ -20,28 +20,28 @@ class CountryController extends Controller
         $this->authorize('viewAny', Country::class);
 
         $countries = Country::all();
-        return view('panel.countries.index', compact('countries'));
+        return view('panel.admin.countries.index', compact('countries'));
     }
 
     public function show(Country $country): View
     {
         $this->authorize('view', $country);
 
-        return view('panel.countries.show', compact('country'));
+        return view('panel.admin.countries.show', compact('country'));
     }
 
     public function create(): View
     {
         $this->authorize('create', Country::class);
 
-        return view('panel.countries.create');
+        return view('panel.admin.countries.create');
     }
 
     public function edit(Country $country): View
     {
         $this->authorize('update', $country);
 
-        return view('panel.countries.edit', compact('country'));
+        return view('panel.admin.countries.edit', compact('country'));
     }
 
     public function store(CountryRequest $request): RedirectResponse

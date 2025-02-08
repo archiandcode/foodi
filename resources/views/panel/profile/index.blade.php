@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    @include('panel._components.alert')
+    @include('_components.alert')
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -21,13 +21,15 @@
 
                         <div class="form-group">
                             <label for="name">Имя</label>
-                            <input type="text" id="name" name="name" class="form-control" value="{{ auth()->user()->name }}" required>
+                            <input type="text" id="name" name="name" class="form-control"
+                                   value="{{ auth()->user()->name }}" required>
                         </div>
 
 
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" value="{{ auth()->user()->email }}" required>
+                            <input type="email" id="email" name="email" class="form-control"
+                                   value="{{ auth()->user()->email }}" required>
                         </div>
 
                         <div class="form-group">
@@ -37,7 +39,8 @@
 
                         <div class="form-group">
                             <label for="password_confirmation">Подтверждение пароля</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control">
+                            <input type="password" id="password_confirmation" name="password_confirmation"
+                                   class="form-control">
                         </div>
 
                         <button type="submit" class="btn btn-primary">Сохранить изменения</button>

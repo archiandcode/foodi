@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Restaurants\DTOs;
 
 use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use Illuminate\Http\UploadedFile;
 use Spatie\LaravelData\Data;
 
 class RestaurantData extends Data
@@ -10,8 +11,8 @@ class RestaurantData extends Data
     public function __construct(
         public string $name,
         public ?string $description,
-        public ?string $logo,
-        public ?string $banner,
+        public UploadedFile|string|null $logo,
+        public UploadedFile|string|null $banner,
         public bool $is_banned,
         public ?string $website,
         public string $bin,

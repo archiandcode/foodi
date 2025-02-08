@@ -19,3 +19,5 @@ Route::get('/', function (): View {
 
 Route::get('/send-application', [RestaurantApplicationController::class, 'create'])->name('restaurant_application.create');
 Route::post('/send-application', [RestaurantApplicationController::class, 'store'])->name('restaurant_application.store');
+
+Route::view('/map', 'map');
