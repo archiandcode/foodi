@@ -13,6 +13,11 @@ class RestaurantPolicy
         return $user->role?->name === RolesEnum::Admin->value;
     }
 
+    public function isOwner(StaffUser $user): bool
+    {
+        return $user->role?->name === RolesEnum::Owner->value;
+    }
+
     public function viewAny(StaffUser $user): bool
     {
         return $this->isAdmin($user);
@@ -33,14 +38,9 @@ class RestaurantPolicy
         return $this->isAdmin($user);
     }
 
-    public function accept(StaffUser $user, Restaurant $restaurant): bool
+    public function own(StaffUser $user, Restaurant $restaurant): bool
     {
-        return $this->isAdmin($user);
-    }
-
-    public function reject(StaffUser $user, Restaurant $restaurant): bool
-    {
-        return $this->isAdmin($user);
+        return $this->isOwner($user);
     }
 
     public function ban(StaffUser $user, Restaurant $restaurant): bool

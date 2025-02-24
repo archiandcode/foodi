@@ -5,6 +5,7 @@ use App\Modules\Admin\Location\Http\Controllers\CountryController;
 use App\Modules\Admin\Restaurants\Http\Controllers\ApplicationController;
 use App\Modules\Admin\Restaurants\Http\Controllers\RestaurantController;
 use App\Modules\Auth\Http\Controllers\StaffAuthController;
+use App\Modules\RestaurantPanel\Orders\Http\Controllers\OrderController;
 use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\AddressController;
 use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\DishController;
 use App\Modules\RestaurantPanel\Restaurant\Http\Controllers\MenuCategoryController;
@@ -56,5 +57,9 @@ Route::middleware('auth:staff')->group(function () {
 
     Route::prefix('restaurant')->group(function () {
         Route::resource('addresses', AddressController::class);
+    });
+
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
     });
 });

@@ -11,7 +11,7 @@ use App\Modules\Admin\Restaurants\Models\Restaurant;
 use App\Modules\Admin\Restaurants\Policies\ApplicationPolicy;
 use App\Modules\Admin\Restaurants\Policies\RestaurantPolicy;
 use App\Modules\Admin\Restaurants\Repositories\ApplicationRepo;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\DishRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\MenuCategoryRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\Repositories\DishRepo;

@@ -29,6 +29,20 @@
     </div>
 
     <div class="form-group mt-3">
+        <label for="code">{{ __('Код страны') }}</label>
+        <input type="text"
+               name="code"
+               id="code"
+               class="form-control @error('code') is-invalid @enderror"
+               value="{{ old('code', isset($country) ? $country->code : '') }}"
+               maxlength="3">
+        @error('code')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+
+
+    <div class="form-group mt-3">
         <button type="submit" class="btn btn-primary">
             {{ __('Сохранить') }}
         </button>

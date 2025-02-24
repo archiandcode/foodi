@@ -9,19 +9,21 @@ use App\Modules\Admin\Restaurants\Actions\RejectApplicationAction;
 use App\Modules\Admin\Restaurants\Contracts\ApplicationRepoInterface;
 use App\Modules\Admin\Restaurants\DTOs\OwnerData;
 use App\Modules\Admin\Restaurants\DTOs\RestaurantData;
-use App\Modules\Public\RestaurantApplication\Enums\RestaurantApplicationEnum;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Admin\Restaurants\Models\Restaurant;
+use App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
+use App\Modules\Shared\Services\SlugService;
 use Illuminate\Support\Facades\DB;
 
 class ApplicationService
 {
-
     public function __construct(
         public ApproveApplicationAction $approveApplicationAction,
         public RejectApplicationAction $rejectApplicationAction,
         public CreateOwnerAction $createOwnerAction,
         public CreateRestaurantAction $createRestaurantAction,
         public ApplicationRepoInterface $applicationRepo,
+        public SlugService $slugService,
     ){}
 
     public function get(): array
@@ -37,7 +39,9 @@ class ApplicationService
     {
         DB::transaction(function () use ($application) {
             $this->approveApplicationAction->execute($application);
-            $restaurant = $this->createRestaurantAction->execute(RestaurantData::fromApplication($application));
+            $data = RestaurantData::fromApplication($application);
+            $data->slug = $this->slugService->generate(new Restaurant(), $data->name);
+            $restaurant = $this->createRestaurantAction->execute($data);
             $this->createOwnerAction->execute(OwnerData::fromApplication($application, $restaurant->id));
         });
     }

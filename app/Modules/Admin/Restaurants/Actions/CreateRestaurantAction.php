@@ -10,6 +10,7 @@ class CreateRestaurantAction
     public function execute(RestaurantData $data): Restaurant
     {
         return Restaurant::query()->create([
+            'slug'        => $data->slug,
             'name'        => $data->name,
             'description' => $data->description,
             'logo'        => $data->logo,

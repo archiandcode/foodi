@@ -83,7 +83,7 @@
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
 
-                                            @if($application->status === \App\Modules\Public\RestaurantApplication\Enums\RestaurantApplicationEnum::Pending)
+                                            @if($application->status === \App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum::Pending)
                                                 <form method="POST"
                                                       action="{{ route('admin.applications.approve', $application) }}"
                                                       class="d-inline-block me-1 mb-1">
@@ -130,7 +130,7 @@
 
                             {{-- Пагинация --}}
                             @if(is_object($applications))
-                                {!! $applications->appends(request()->query())->links('panel._components.pagination') !!}
+                                {!! $applications->appends(request()->query())->links('_components.pagination') !!}
                             @endif
                         </div>
                     </div>

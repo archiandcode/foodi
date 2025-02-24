@@ -10,13 +10,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string name
  * @property float $latitude
  * @property float $longitude
+ * @property bool $is_default
  */
+
 class City extends Model
 {
     protected $fillable = [
         'name',
         'latitude',
         'longitude',
+        'is_default',
     ];
 
     public function country(): BelongsTo

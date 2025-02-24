@@ -16,7 +16,9 @@ return new class extends Migration
             $table->dropColumn('address');
             $table->dropColumn('notes');
             $table->dropColumn('is_default');
-            $table->dropForeign(['country_id', 'city_id']);
+            $table->dropForeign('addresses_country_id_foreign');
+            $table->dropForeign('addresses_city_id_foreign');
+
             $table->dropColumn('country_id');
             $table->dropColumn('city_id');
         });

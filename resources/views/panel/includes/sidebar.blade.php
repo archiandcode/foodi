@@ -47,7 +47,7 @@
                 {{--                    </ul>--}}
                 {{--                </li>--}}
 
-                @can('viewAny', \App\Modules\Public\RestaurantApplication\Models\RestaurantApplication::class)
+                @can('viewAny', \App\Modules\Public\Restaurant\Models\RestaurantApplication::class)
                     <li class="nav-item">
                         <a href="{{ route('admin.applications.index') }}" class="nav-link {{ request()->routeIs('admin.applications.*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-alt"></i>
@@ -93,6 +93,13 @@
                     <a href="{{ route('admin.dishes.index') }}" class="nav-link {{ request()->routeIs('admin.dishes.*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>{{ __('Блюда') }}</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-utensils"></i>
+                        <p>{{ __('Заказы') }}</p>
                     </a>
                 </li>
             </ul>

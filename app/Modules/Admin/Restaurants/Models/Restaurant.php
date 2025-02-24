@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int id
+ * @property string slug
  * @property string name
  * @property string|null description
  * @property string|null logo
@@ -23,16 +24,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Restaurant extends Model
 {
     protected $fillable = [
-        'name',
-        'description',
-        'logo',
-        'banner',
-        'is_banned',
-        'website',
-        'bin',
-        'is_active',
-        'restaurant_id'
+        'slug',
+        'name', 'description',
+        'logo', 'banner',
+        'bin', 'website',
+        'is_active', 'is_banned',
     ];
+
+    protected $appends = ['link', 'banner_url'];
+
+    public function getLinkAttribute(): string
+    {
+        return route('restaurant.dishes', ['restaurant' => $this->slug]);
+    }
+
+    public function getBannerUrlAttribute(): string
+    {
+        $path = $this->banner;
+
+        return $path
+            ? asset('storage/' . $path)
+            : "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg";
+    }
+
 
     public function categories(): HasMany
     {
@@ -52,5 +66,10 @@ class Restaurant extends Model
     public function addresses(): HasMany
     {
         return $this->hasMany(RestaurantAddress::class);
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

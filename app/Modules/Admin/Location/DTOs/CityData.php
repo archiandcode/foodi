@@ -10,5 +10,6 @@ class CityData extends Data
         public string $name,
         public string $latitude,
         public string $longitude,
+        public bool $is_default,
     ){}
 }

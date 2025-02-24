@@ -4,34 +4,34 @@ namespace App\Modules\Auth\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Auth\Http\Requests\Staff\LoginRequest;
+use App\Modules\Auth\Services\StaffUserAuthService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class StaffAuthController extends Controller
 {
+    public function __construct(
+        protected StaffUserAuthService $service
+    ) {}
+
     public function loginForm(): View {
         return view('panel.auth.login');
     }
 
     public function login(LoginRequest $request): RedirectResponse
     {
-        $credentials = $request->validated();
-        if (auth()->guard('staff')->attempt($credentials, $request->boolean('remember'))) {
-            $request->session()->regenerate();
-
-            return redirect()->intended('/admin/dashboard');
+        if (!$this->service->login($request->getData())) {
+            return back()->withErrors([
+                'email' => 'Неверный логин или пароль.',
+            ])->onlyInput('email');
         }
-        return back()->withErrors([
-            'email' => 'Неверный логин или пароль.',
-        ])->onlyInput('email');
+
+        return redirect()->intended('/admin/dashboard');
     }
 
     public function logout(): RedirectResponse
     {
-        auth()->guard('staff')->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-
+        $this->service->logout();
         return redirect()->route('admin.login.form');
     }
 }

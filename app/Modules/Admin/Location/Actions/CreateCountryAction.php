@@ -11,6 +11,7 @@ class CreateCountryAction
     {
         Country::query()->create([
             'name' => $data->name,
+            'code' => $data->code,
         ]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

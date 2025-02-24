@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @property int id
  * @property string name
+ * @property string code
  */
 class Country extends Model
 {
     protected $fillable = [
         'name',
+        'code',
     ];
 
     public function cities(): HasMany

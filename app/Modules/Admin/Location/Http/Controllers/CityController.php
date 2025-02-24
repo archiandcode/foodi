@@ -3,6 +3,7 @@
 namespace App\Modules\Admin\Location\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Location\DTOs\CityData;
 use App\Modules\Admin\Location\Http\Requests\CityRequest;
 use App\Modules\Admin\Location\Models\City;
 use App\Modules\Admin\Location\Models\Country;
@@ -44,11 +45,11 @@ class CityController extends Controller
     public function store(CityRequest $request, Country $country): RedirectResponse
     {
         $this->authorize('create', City::class);
-        $country->cities()->create($request->validated());
+        $this->service->store($country, CityData::from($request->validated()));
         return redirect()->route('admin.cities.index', $country);
     }
 
-    public function update(City $city, CityRequest $request, Country $country): RedirectResponse
+    public function update(CityRequest $request, Country $country, City $city): RedirectResponse
     {
         $this->authorize('update', $city);
         $city->update($request->validated());

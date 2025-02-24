@@ -1,65 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'FoodPark')</title>
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('main/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('main/css/null.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
-    @notifyCss
-    <style>
-        .notify {
-            z-index: 9999 !important;
-        }
-    </style>
-
-    <title>@yield('title')</title>
+    @stack('styles')
 </head>
-
-<body>
-
-<header class="navbar">
-    <div class="navbar__logo">🍴</div>
-
-    <div class="navbar__search navbar__search--desktop">
-        <input type="text" placeholder="Найти ресторан, блюдо или товар">
-        <button>Найти</button>
-    </div>
+<body id="app">
+<navbar
+    login-route="{{ route('login.form') }}"
+    :is-logged-in="@json(auth()->check())"
+    :csrf-token="'{{ csrf_token() }}'"
+    :on-auth-page="@json(request()->routeIs('login.form') || request()->routeIs('register.form'))"
+    @open-location-modal="openLocationModal"
+></navbar>
 
 
-    @if(auth()->check())
-        <div class="navbar__login">
-            Test
-        </div>
-    @else
-        <div class="navbar__login">
-            @if (!request()->routeIs('login.form') && !request()->routeIs('register.form'))
-                <a href="{{ route('login') }}">
-                    <button>
-                        Войти
-                    </button>
-                </a>
-            @endif
-        </div>
-    @endif
-</header>
-
-<div class="navbar__search-wrapper">
-    <div class="navbar__search">
-        <input type="text" placeholder="Найти ресторан">
-        <button>Найти</button>
-    </div>
-</div>
+<location-modal ref="locationModal"></location-modal>
 
 @yield('content')
-@notifyJs
-@include('notify::components.notify')
+
+<location-modal></location-modal>
+
+@stack('scripts')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+@vite(['resources/js/app.js'])
+
 </body>
+
 
 </html>

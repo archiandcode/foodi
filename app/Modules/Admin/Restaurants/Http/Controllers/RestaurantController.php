@@ -20,28 +20,28 @@ class RestaurantController extends Controller
         $this->authorize('viewAny', Restaurant::class);
 
         $restaurants = Restaurant::query()->where('is_banned', false)->get();
-        return view('panel.restaurants.index', compact('restaurants'));
+        return view('panel.admin.restaurants.index', compact('restaurants'));
     }
 
     public function show(Restaurant $restaurant): View
     {
         $this->authorize('view', $restaurant);
 
-        return view('panel.restaurants.show', compact('restaurant'));
+        return view('panel.admin.restaurants.show', compact('restaurant'));
     }
 
     public function create(): View
     {
         $this->authorize('create', Restaurant::class);
 
-        return view('panel.restaurants.create');
+        return view('panel.admin.restaurants.create');
     }
 
     public function edit(Restaurant $restaurant): View
     {
         $this->authorize('update', $restaurant);
 
-        return view('panel.restaurants.edit', compact('restaurant'));
+        return view('panel.admin.restaurants.edit', compact('restaurant'));
     }
 
     public function update(Restaurant $restaurant, RestaurantRequest $request): RedirectResponse

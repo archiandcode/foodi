@@ -3,7 +3,7 @@
 namespace App\Modules\Admin\Restaurants\Repositories;
 
 use App\Modules\Admin\Restaurants\Contracts\ApplicationRepoInterface;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ApplicationRepo implements ApplicationRepoInterface

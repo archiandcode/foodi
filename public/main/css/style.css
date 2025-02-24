@@ -1,4 +1,8 @@
 /* ===== BASE ===== */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -8,9 +12,9 @@ body {
 
 /* ===== CONTAINER ===== */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 20px 16px;
+    /*padding: 20px 16px;*/
     box-sizing: border-box;
 }
 /* ===== NAVBAR ===== */
@@ -48,37 +52,19 @@ body {
     cursor: pointer;
 }
 
-/* ===== SEARCH (desktop + mobile variants) ===== */
+/* ===== SEARCH ===== */
 
-/* Поиск в navbar по умолчанию (десктоп) */
-.navbar__search--desktop {
+.search-block {
     display: flex;
-}
-
-/* Поиск под navbar (мобайл) */
-.navbar__search--mobile {
-    display: none;
-}
-
-/* Контейнер под мобильный поиск */
-.navbar__search-wrapper {
-    display: none;
-    padding: 16px;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-}
-
-/* Общий стиль поиска */
-.navbar__search {
-    display: flex;
+    margin: 20px auto;
     border: 1.5px solid #ffd700;
     border-radius: 28px;
     overflow: hidden;
-    max-width: 500px;
+    max-width: 800px;
     width: 100%;
 }
 
-.navbar__search input {
+.search-block input {
     border: none;
     padding: 10px 16px;
     outline: none;
@@ -86,7 +72,7 @@ body {
     font-size: 16px;
 }
 
-.navbar__search button {
+.search-block button {
     background-color: #ffd700;
     border: none;
     padding: 10px 20px;
@@ -125,11 +111,11 @@ body {
     transform: translateY(-4px);
 }
 
-.restaurant-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+/*.restaurant-card img {*/
+/*    width: 100%;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*}*/
 
 .restaurant-info {
     padding: 12px;
@@ -138,6 +124,20 @@ body {
 .restaurant-info h2 {
     margin: 0 0 4px;
     font-size: 18px;
+}
+
+.restaurant-image-wrapper {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 = 9 / 16 * 100 */
+    overflow: hidden;
+}
+
+.restaurant-image-wrapper img {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* ===== LABELS ===== */
@@ -171,33 +171,6 @@ body {
     .navbar__login button {
         padding: 8px 16px;
         font-size: 14px;
-    }
-
-    .navbar__search--desktop {
-        display: none;
-    }
-
-    .navbar__search-wrapper {
-        display: block;
-        padding: 12px 16px;
-    }
-
-    .navbar__search--mobile {
-        display: flex;
-    }
-
-    .navbar__search {
-        width: 100%;
-    }
-
-    .navbar__search input {
-        padding: 10px;
-        font-size: 15px;
-    }
-
-    .navbar__search button {
-        padding: 10px 16px;
-        font-size: 15px;
     }
 }
 
@@ -279,6 +252,8 @@ body {
     border-radius: 20px;
     padding: 24px;
     height: fit-content;
+    position: sticky;
+    top: 96px;
 }
 
 .back-link {
@@ -307,21 +282,42 @@ body {
     transition: background 0.2s;
 }
 
+.category-nav li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /*padding: 10px 12px;*/
+    border-radius: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+}
+
+.category-nav li a:hover,
+.category-nav li a.active {
+    background: #f0f0f0;
+}
+
+
 .category-nav li:hover,
 .category-nav .active {
     background: #f0f0f0;
 }
+
+
 
 /* Hero */
 .restaurant-hero {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
+    height: 220px;
 }
 
 .restaurant-hero img {
     width: 100%;
     height: auto;
+    object-fit: cover;
     display: block;
 }
 
@@ -353,6 +349,13 @@ body {
     margin-top: 32px;
 }
 
+.product-title {
+    margin-bottom: 16px;
+    font-size: 28px;
+    font-weight: bold;
+    scroll-margin-top: 100px;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -365,27 +368,59 @@ body {
     border-radius: 16px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 8px;
 }
 
-.product-card img {
+.product-image-wrapper {
     width: 100%;
+    height: 180px;
+    overflow: hidden;
     border-radius: 12px;
     margin-bottom: 12px;
 }
+.product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+.quantity-control button {
+    background-color: #ffd700;
+    border: none;
+    padding: 6px 10px;
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+/*.product-card img {*/
+/*    width: 100%;*/
+/*    border-radius: 12px;*/
+/*    margin-bottom: 12px;*/
+/*}*/
 
 .product-card h3 {
     font-size: 18px;
-    margin-bottom: 8px;
 }
 
 .product-card p {
     font-size: 14px;
     color: #666;
+    margin-bottom: auto;
 }
 
 .product-card strong {
     display: block;
-    margin: 8px 0;
     font-size: 16px;
 }
 
@@ -401,11 +436,11 @@ body {
 /* ===== CART ===== */
 .cart {
     position: sticky;
-    top: 32px; /* Было 96px — теперь выше */
+    top: 96px;
     background: #fff;
     border-radius: 20px;
     padding: 24px;
-    max-height: 550px; /* Статическая высота */
+    max-height: 550px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -433,6 +468,32 @@ body {
     border-top: 1px solid #eee;
     padding-top: 16px;
 }
+
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-item-name {
+    flex: 1;
+}
+
+.cart-item-quantity, .cart-item-price {
+    margin-left: 8px;
+}
+
+.cart-total {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
 /* ===== RESTAURANT REGISTER ===== */
 .restaurant-register-page {
     max-width: 720px;
@@ -545,4 +606,40 @@ body {
 
 .auth-switch a:hover {
     opacity: 0.7;
+}
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal__content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.modal__content h2 {
+    margin-bottom: 20px;
+}
+
+.modal__content button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2d9cdb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }

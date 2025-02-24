@@ -29,6 +29,27 @@
     </div>
 
     <div class="form-group mt-3">
+        <div class="form-check">
+            {{-- Скрытое поле, чтобы при снятии галочки отправлялось "false" --}}
+            <input type="hidden" name="is_default" value="0">
+
+            <input type="checkbox"
+                   name="is_default"
+                   id="is_default"
+                   value="1"
+                   class="form-check-input"
+                {{ old('is_default', $city->is_default ?? false) ? 'checked' : '' }}>
+            <label for="is_default" class="form-check-label">
+                {{ __('Город по умолчанию') }}
+            </label>
+        </div>
+        @error('is_default')
+        <div class="invalid-feedback d-block">{{ $message }}</div>
+        @enderror
+    </div>
+
+
+    <div class="form-group mt-3">
         <label>{{__('Выберите точку на карте')}}</label>
         <div id="map" style="height: 400px; width: 100%; border: 1px solid #ccc;"></div>
 

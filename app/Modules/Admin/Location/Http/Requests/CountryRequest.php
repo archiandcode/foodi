@@ -10,6 +10,7 @@ class CountryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:100'],
+            'code' => ['required', 'string', 'max:3'],
         ];
     }
 }

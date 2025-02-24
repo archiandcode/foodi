@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Restaurants\DTOs;
 
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Data;
 

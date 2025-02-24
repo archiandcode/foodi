@@ -3,9 +3,12 @@
 namespace App\Modules\Admin\Location\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Modules\Admin\Location\DTOs\CountryData;
 use App\Modules\Admin\Location\Http\Requests\CountryRequest;
 use App\Modules\Admin\Location\Models\Country;
 use App\Modules\Admin\Location\Services\CountryService;
+use App\Modules\Api\Location\Resources\CountryResource;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -19,8 +22,13 @@ class CountryController extends Controller
     {
         $this->authorize('viewAny', Country::class);
 
-        $countries = Country::all();
+        $countries = $this->service->getCountriesWithPaginate();
         return view('panel.admin.countries.index', compact('countries'));
+    }
+
+    public function json(): JsonResponse
+    {
+        return response()->json(CountryResource::collection($this->service->getCountries()));
     }
 
     public function show(Country $country): View
@@ -48,7 +56,7 @@ class CountryController extends Controller
     {
         $this->authorize('create', Country::class);
 
-        Country::query()->create($request->validated());
+        $this->service->store(CountryData::from($request->validated()));
         return redirect()->route('admin.countries.index');
     }
 
@@ -56,7 +64,7 @@ class CountryController extends Controller
     {
         $this->authorize('update', $country);
 
-        $country->update($request->validated());
+        $this->service->update($country, CountryData::from($request->validated()));
         return redirect()->route('admin.countries.index');
     }
 
@@ -64,7 +72,12 @@ class CountryController extends Controller
     {
         $this->authorize('delete', $country);
 
-        $country->delete();
-        return redirect()->route('admin.countries.index');
+        if (! $this->service->delete($country)) {
+            return redirect()->route('admin.countries.index')
+                ->with('error', 'Невозможно удалить страну, так как к ней привязаны города.');
+        }
+
+        return redirect()->route('admin.countries.index')
+            ->with('success', 'Страна успешно удалена.');
     }
 }

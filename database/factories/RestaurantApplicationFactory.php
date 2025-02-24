@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Modules\Public\RestaurantApplication\Enums\RestaurantApplicationEnum;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Admin\Restaurants\DTOs;
 
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Http\UploadedFile;
 use Spatie\LaravelData\Data;
 
@@ -10,6 +10,7 @@ class RestaurantData extends Data
 {
     public function __construct(
         public string $name,
+        public string|null $slug,
         public ?string $description,
         public UploadedFile|string|null $logo,
         public UploadedFile|string|null $banner,
@@ -22,6 +23,7 @@ class RestaurantData extends Data
     {
         return new self(
             name: $application->name,
+            slug: null,
             description: $application->description,
             logo: null,
             banner: null,

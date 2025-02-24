@@ -4,7 +4,7 @@ namespace App\Modules\Admin\Restaurants\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Modules\Admin\Restaurants\Services\ApplicationService;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -18,14 +18,14 @@ class ApplicationController extends Controller
     {
         $this->authorize('viewAny', RestaurantApplication::class);
 
-        return view('panel.restaurants.applications.index', $this->service->get());
+        return view('panel.admin.restaurants.applications.index', $this->service->get());
     }
 
     public function show(RestaurantApplication $application): View
     {
         $this->authorize('view', $application);
 
-        return view('panel.restaurants.applications.show', compact('application'));
+        return view('panel.admin.restaurants.applications.show', compact('application'));
     }
 
     public function approve(RestaurantApplication $application): RedirectResponse

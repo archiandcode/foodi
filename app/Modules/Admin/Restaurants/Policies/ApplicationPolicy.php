@@ -4,7 +4,7 @@ namespace App\Modules\Admin\Restaurants\Policies;
 
 use App\Modules\StaffUser\Enums\RolesEnum;
 use App\Modules\StaffUser\Models\StaffUser;
-use App\Modules\Public\RestaurantApplication\Models\RestaurantApplication;
+use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 
 class ApplicationPolicy
 {
