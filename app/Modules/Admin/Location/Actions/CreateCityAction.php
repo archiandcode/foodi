@@ -13,6 +13,7 @@ class CreateCityAction
             'name' => $data->name,
             'latitude' => $data->latitude,
             'longitude' => $data->longitude,
+            'is_default' => $data->is_default,
         ]);
     }
 }

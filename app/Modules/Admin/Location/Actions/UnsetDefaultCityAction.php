@@ -6,9 +6,11 @@ use App\Modules\Admin\Location\Models\City;
 
 class UnsetDefaultCityAction
 {
-    public function execute(City $city): void
+    public function execute(?City $city): void
     {
-        $city->is_default = false;
-        $city->save();
+        if ($city) {
+            $city->is_default = false;
+            $city->save();
+        }
     }
 }
