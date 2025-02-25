@@ -62,7 +62,7 @@ export default {
     },
     methods: {
         fetchCountries() {
-            fetch('/api/countries')
+            fetch('/location/countries')
                 .then(res => res.json())
                 .then(data => this.countries = data);
         },
@@ -71,7 +71,7 @@ export default {
             this.cities = [];
 
             if (this.selectedCountry) {
-                fetch(`/api/cities?country=${this.selectedCountry}`)
+                fetch(`/location/cities?country=${this.selectedCountry}`)
                     .then(res => res.json())
                     .then(data => this.cities = data);
             }

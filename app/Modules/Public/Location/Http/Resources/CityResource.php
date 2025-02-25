@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Api\Location\Resources;
+namespace App\Modules\Public\Location\Http\Resources;
 
 use App\Modules\Admin\Location\Models\City;
 use Illuminate\Http\Request;

@@ -4,7 +4,7 @@
         const citySelect = document.getElementById('citySelect');
         const cityUrl = countrySelect.dataset.url;
 
-        fetch('/api/countries')
+        fetch('/location/countries')
             .then(response => response.json())
             .then(data => {
                 data.forEach(country => {

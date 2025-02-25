@@ -4,6 +4,7 @@ use App\Modules\Auth\Http\Controllers\UserAuthController;
 use App\Modules\Public\Carts\Http\Controllers\AddToCartController;
 use App\Modules\Public\Carts\Http\Controllers\CartController;
 use App\Modules\Public\Carts\Http\Controllers\GetCartItemsController;
+use App\Modules\Public\Location\Http\Controllers\LocationController;
 use App\Modules\Public\Orders\Http\Controllers\CreateOrderController;
 use App\Modules\Public\Restaurant\Http\Controllers\HomeController;
 use App\Modules\Public\Restaurant\Http\Controllers\RestaurantApplicationController;
@@ -39,3 +40,9 @@ Route::get('restaurant/{restaurant}', [HomeController::class, 'dishes'])->name('
 Route::post('/order', CreateOrderController::class)->name('order.store');
 
 Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
+
+Route::prefix('location')->name('location.')->group(function () {
+    Route::get('/countries', [LocationController::class, 'getCountries'])->name('countries');
+    Route::get('/cities', [LocationController::class, 'getCities'])->name('cities');
+});
+

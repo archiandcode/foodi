@@ -7,7 +7,7 @@ use App\Modules\Admin\Location\DTOs\CountryData;
 use App\Modules\Admin\Location\Http\Requests\CountryRequest;
 use App\Modules\Admin\Location\Models\Country;
 use App\Modules\Admin\Location\Services\CountryService;
-use App\Modules\Api\Location\Resources\CountryResource;
+use App\Modules\Public\Location\Http\Resources\CountryResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
