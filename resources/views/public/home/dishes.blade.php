@@ -19,10 +19,3 @@
         csrf="{{ csrf_token() }}"
     ></dishes-view>
 @endsection
-
-
-@push('scripts')
-    <script>
-        localStorage.clear();
-    </script>
-@endpush

@@ -8,4 +8,7 @@
 
     <!-- Рестораны -->
     <restaurant-list></restaurant-list>
+
+    <!-- Модальное окно -->
+    <location-modal></location-modal>
 @endsection

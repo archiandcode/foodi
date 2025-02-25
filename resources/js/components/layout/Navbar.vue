@@ -41,15 +41,7 @@
                     >
                         <input type="hidden" name="_token" :value="csrfToken" />
                     </form>
-
                 </div>
-                <button
-                    class="btn btn-outline-primary"
-                    @click="$emit('open-location-modal')"
-                    title="Изменить город"
-                >
-                    <i class="bi bi-geo-alt"></i>
-                </button>
             </div>
         </div>
     </nav>

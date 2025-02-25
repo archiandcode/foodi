@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="locationModal" tabindex="-1" ref="modalElement">
+    <div class="modal fade" id="locationModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,20 +42,22 @@ export default {
         return {
             countries: [],
             cities: [],
-            selectedCountry: '',
-            selectedCity: '',
-            modalInstance: null,
-            wasAutoShown: false,
+            selectedCountry: localStorage.getItem('selectedCountry') || '',
+            selectedCity: localStorage.getItem('selectedCity') || '',
         };
     },
     mounted() {
-        const savedCountry = localStorage.getItem('selectedCountry');
-        const savedCity = localStorage.getItem('selectedCity');
-
         this.fetchCountries();
 
-        if (!savedCountry || !savedCity) {
-            this.$nextTick(() => this.autoShow());
+        if (!this.selectedCountry || !this.selectedCity) {
+            this.$nextTick(() => {
+                const modal = new bootstrap.Modal(document.getElementById('locationModal'), {
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                modal.show();
+                this.modalInstance = modal; // если всё-таки понадобится
+            });
         }
     },
     methods: {
@@ -65,25 +67,22 @@ export default {
                 .then(data => this.countries = data);
         },
         fetchCities() {
-            this.cities = [];
             this.selectedCity = '';
-            fetch(`/api/cities?country=${this.selectedCountry}`)
-                .then(res => res.json())
-                .then(data => this.cities = data);
-        },
-        autoShow() {
-            if (this.wasAutoShown) return; // защита только для автоматического показа
-            this.show();
-            this.wasAutoShown = true;
-        },
-        show() {
-            this.modalInstance = bootstrap.Modal.getOrCreateInstance(this.$refs.modalElement);
-            this.modalInstance.show();
+            this.cities = [];
+
+            if (this.selectedCountry) {
+                fetch(`/api/cities?country=${this.selectedCountry}`)
+                    .then(res => res.json())
+                    .then(data => this.cities = data);
+            }
         },
         saveAndClose() {
             localStorage.setItem('selectedCountry', this.selectedCountry);
             localStorage.setItem('selectedCity', this.selectedCity);
-            this.modalInstance?.hide();
+
+            const modalEl = document.getElementById('locationModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal?.hide();
         }
     }
 }

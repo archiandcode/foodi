@@ -10,13 +10,7 @@ import DishesView from "./components/dishes/DishesView.vue";
 import CartPage from "./components/cart/CartPage.vue";
 import LocationModal from './components/modals/LocationModal.vue';
 
-const app = createApp({
-    methods: {
-        openLocationModal() {
-            this.$refs.locationModal?.show();
-        }
-    }
-})
+const app = createApp({})
 
 app.component('navbar', Navbar);
 app.component('search-block', SearchBlock);
