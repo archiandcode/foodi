@@ -4,7 +4,6 @@ namespace App\Modules\Public\Location\Services;
 
 use App\Modules\Admin\Location\Contracts\CityRepoInterface;
 use App\Modules\Admin\Location\Contracts\CountryRepoInterface;
-use App\Modules\Admin\Location\Models\Country;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
@@ -22,12 +21,12 @@ class LocationService
         });
     }
 
-    public function getCities(Country $country): Collection
+    public function getCities(int $countryId): Collection
     {
-        $cacheKey = "public_cities_for_country_{$country->id}";
+        $cacheKey = "public_cities_for_country_{$countryId}";
 
-        return Cache::remember($cacheKey, now()->addHours(24), function () use ($country) {
-            return $this->cityRepo->getByCountryId($country->id);
+        return Cache::remember($cacheKey, now()->addHours(24), function () use ($countryId) {
+            return $this->cityRepo->getByCountryId($countryId);
         });
     }
 }
