@@ -80,7 +80,7 @@
                         </div>
                     </div>
 
-                    @if($application->status === \App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum::Pending)
+                    @if($application->status === \App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum::PENDING)
                         <div class="card-footer">
                             <form method="POST" action="{{ route('admin.applications.approve', $application) }}" style="display:inline">
                                 @csrf

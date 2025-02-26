@@ -83,7 +83,7 @@
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
 
-                                            @if($application->status === \App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum::Pending)
+                                            @if($application->status === \App\Modules\Public\Restaurant\Enums\RestaurantApplicationEnum::PENDING)
                                                 <form method="POST"
                                                       action="{{ route('admin.applications.approve', $application) }}"
                                                       class="d-inline-block me-1 mb-1">

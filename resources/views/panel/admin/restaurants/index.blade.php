@@ -15,6 +15,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
+                            {{-- При необходимости: добавить кнопку "Создать" --}}
                         </div>
                     </div>
                     <div class="card-body">
@@ -24,7 +25,10 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>{{ __('Название') }}</th>
-                                    <th>{{ __('Статус') }}</th>
+                                    <th>Slug</th>
+                                    <th>BIN</th>
+                                    <th>Сайт</th>
+                                    <th>Баннер</th>
                                     <th>{{ __('Действие') }}</th>
                                 </tr>
                                 </thead>
@@ -33,31 +37,52 @@
                                     <tr>
                                         <td>{{ $restaurant->id }}</td>
                                         <td>{{ $restaurant->name }}</td>
-                                        <td>{{ ucfirst($restaurant->status) }}</td>
+                                        <td>{{ $restaurant->slug }}</td>
+                                        <td>{{ $restaurant->bin }}</td>
+                                        <td>
+                                            @if($restaurant->website)
+                                                <a href="{{ $restaurant->website }}" target="_blank">
+                                                    {{ $restaurant->website }}
+                                                </a>
+                                            @else
+                                                <span class="text-muted">—</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <img src="{{ $restaurant->banner_url }}"
+                                                 alt="banner"
+                                                 width="100"
+                                                 class="img-thumbnail">
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.restaurants.show', $restaurant) }}"
-                                               class="btn btn-info btn-sm mb-2" title="{{ __('Просмотр') }}">
+                                               class="btn btn-info btn-sm mb-2"
+                                               title="{{ __('Просмотр') }}">
                                                 <i class="fa fa-eye" aria-hidden="true"></i>
                                             </a>
                                             <a href="{{ route('admin.restaurants.edit', $restaurant) }}"
-                                               class="btn btn-primary btn-sm mb-2" title="{{ __('Редактировать') }}">
+                                               class="btn btn-primary btn-sm mb-2"
+                                               title="{{ __('Редактировать') }}">
                                                 <i class="fa fa-fw fa-edit" aria-hidden="true"></i>
                                             </a>
                                             <form method="POST"
                                                   action="{{ route('admin.restaurants.ban', $restaurant) }}"
-                                                  accept-charset="UTF-8" style="display:inline">
+                                                  accept-charset="UTF-8"
+                                                  style="display:inline">
                                                 @csrf
-                                                <button type="submit" class="btn btn-danger btn-sm mb-2"
-                                                        title="{{ __('Удалить') }}"
-                                                        onclick="return confirm('{{ __('Подтвердите удаление ресторана?') }}')">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <button type="submit"
+                                                        class="btn btn-warning btn-sm mb-2"
+                                                        title="{{ __('Заблокировать ресторан') }}"
+                                                        onclick="return confirm('{{ __('Вы уверены, что хотите заблокировать этот ресторан?') }}')">
+                                                    <i class="fa fa-ban" aria-hidden="true"></i>
                                                 </button>
                                             </form>
+
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td align="center" class="text-danger" colspan="4">
+                                        <td align="center" class="text-danger" colspan="7">
                                             {{ __('Рестораны не найдены') }}
                                         </td>
                                     </tr>
@@ -67,13 +92,17 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>{{ __('Название') }}</th>
-                                    <th>{{ __('Статус') }}</th>
+                                    <th>Slug</th>
+                                    <th>BIN</th>
+                                    <th>Сайт</th>
+                                    <th>Баннер</th>
                                     <th>{{ __('Действие') }}</th>
                                 </tr>
                                 </tfoot>
                             </table>
+
                             <div class="pagination-wrapper">
-                                {{-- {!! $restaurants->links('admin._components.pagination') !!} --}}
+{{--                                {!! $restaurants->links('admin._components.pagination') !!}--}}
                             </div>
                         </div>
                     </div>
@@ -81,4 +110,5 @@
             </div>
         </div>
     </div>
+
 @endsection

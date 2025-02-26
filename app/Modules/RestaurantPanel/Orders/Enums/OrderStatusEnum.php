@@ -9,7 +9,7 @@ enum OrderStatusEnum: string
     case COOKING = 'cooking';
     case SHIPPED = 'shipped';
 
-    public function labels(): array
+    public function labels(): string
     {
         return match ($this) {
             self::PENDING => __('Pending'),

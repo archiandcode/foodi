@@ -10,13 +10,6 @@
 <body class="hold-transition login-page">
 
 <div class="login-box">
-    <!-- /.login-logo -->
-    <div class="login-logo">
-        <a href="">
-            <img src="{{ asset('img/logo_black.svg') }}" alt="logo" height="50">
-        </a>
-    </div>
-
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
             <h3 class="card-title float-none text-center">@yield('content_header')</h3>

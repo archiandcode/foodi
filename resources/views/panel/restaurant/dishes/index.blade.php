@@ -12,9 +12,11 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('admin.dishes.create') }}" class="btn btn-success">
-                    <i class="fa fa-plus"></i> {{ __('Добавить') }}
-                </a>
+                @can('create', \App\Modules\RestaurantPanel\Restaurant\Models\Dish::class)
+                    <a href="{{ route('admin.dishes.create') }}" class="btn btn-success">
+                        <i class="fa fa-plus"></i> {{ __('Добавить') }}
+                    </a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -52,27 +54,35 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-info btn-sm mb-1">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                    <a href="{{ route('admin.dishes.edit', $dish) }}"
-                                       class="btn btn-primary btn-sm mb-1">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form method="POST" action="{{ route('admin.dishes.destroy', $dish) }}"
-                                          style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm mb-1"
-                                                onclick="return confirm('Удалить блюдо?')">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </form>
+                                    @can('view', $dish)
+                                        <a href="{{ route('admin.dishes.show', $dish) }}" class="btn btn-info btn-sm mb-1">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    @endcan
+
+                                    @can('update', $dish)
+                                        <a href="{{ route('admin.dishes.edit', $dish) }}"
+                                           class="btn btn-primary btn-sm mb-1">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                    @endcan
+
+                                    @can('delete', $dish)
+                                        <form method="POST" action="{{ route('admin.dishes.destroy', $dish) }}"
+                                              style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm mb-1"
+                                                    onclick="return confirm('Удалить блюдо?')">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6" class="text-center text-danger">Блюда не найдены</td>
+                                <td colspan="7" class="text-center text-danger">Блюда не найдены</td>
                             </tr>
                         @endforelse
                         </tbody>

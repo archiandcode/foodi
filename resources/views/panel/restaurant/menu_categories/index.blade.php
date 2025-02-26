@@ -15,10 +15,12 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <a href="{{ route('admin.menu_categories.create') }}"
-                               class="btn btn-success">
-                                <i class="fa fa-plus"></i> {{ __('Добавить') }}
-                            </a>
+                            @can('create', \App\Modules\RestaurantPanel\Restaurant\Models\MenuCategory::class)
+                                <a href="{{ route('admin.menu_categories.create') }}"
+                                   class="btn btn-success">
+                                    <i class="fa fa-plus"></i> {{ __('Добавить') }}
+                                </a>
+                            @endcan
                         </div>
                     </div>
                     <div class="card-body">
@@ -37,24 +39,32 @@
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>
-                                            <a href="{{ route('admin.menu_categories.show', $category) }}"
-                                               class="btn btn-info btn-sm">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('admin.menu_categories.edit', $category) }}"
-                                               class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <form method="POST"
-                                                  action="{{ route('admin.menu_categories.destroy', $category) }}"
-                                                  style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                        onclick="return confirm('{{ __('Подтвердите удаление категории?') }}')">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            @can('view', $category)
+                                                <a href="{{ route('admin.menu_categories.show', $category) }}"
+                                                   class="btn btn-info btn-sm">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            @endcan
+
+                                            @can('update', $category)
+                                                <a href="{{ route('admin.menu_categories.edit', $category) }}"
+                                                   class="btn btn-primary btn-sm">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            @endcan
+
+                                            @can('delete', $category)
+                                                <form method="POST"
+                                                      action="{{ route('admin.menu_categories.destroy', $category) }}"
+                                                      style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('{{ __('Подтвердите удаление категории?') }}')">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @empty
@@ -79,5 +89,4 @@
             </div>
         </div>
     </div>
-
 @endsection

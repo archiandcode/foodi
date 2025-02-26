@@ -18,6 +18,7 @@ class AddressController extends Controller
 
     public function index(): View
     {
+        $this->authorize('viewAny', RestaurantAddress::class);
         $restaurant = $this->service->getCurrentRestaurant();
         $addresses = $restaurant->addresses()->get();
 
@@ -26,11 +27,13 @@ class AddressController extends Controller
 
     public function create(): View
     {
+        $this->authorize('create', RestaurantAddress::class);
         return view('panel.restaurant.addresses.create');
     }
 
     public function store(AddressRequest $request): RedirectResponse
     {
+        $this->authorize('create', RestaurantAddress::class);
 
         $this->service->store(AddressData::from($request->validated()));
 
@@ -41,16 +44,20 @@ class AddressController extends Controller
 
     public function show(RestaurantAddress $address): View
     {
+        $this->authorize('view', $address);
         return view('panel.restaurant.addresses.show', compact('address'));
     }
 
     public function edit(RestaurantAddress $address): View
     {
+        $this->authorize('update', $address);
         return view('panel.restaurant.addresses.edit', compact('address'));
     }
 
     public function update(AddressRequest $request, RestaurantAddress $address): RedirectResponse
     {
+        $this->authorize('update', $address);
+
         $this->service->update($address, AddressData::from($request->validated()));
 
         return redirect()
@@ -60,8 +67,10 @@ class AddressController extends Controller
 
     public function destroy(RestaurantAddress $address): RedirectResponse
     {
+        $this->authorize('delete', $address);
+
         $address->delete();
+
         return back();
     }
-
 }
