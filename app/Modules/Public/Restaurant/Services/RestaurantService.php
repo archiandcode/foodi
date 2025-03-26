@@ -13,7 +13,6 @@ class RestaurantService
 
     public function get(int $cityId): Collection
     {
-        info($cityId);
         return $this->restaurantRepo->getRestaurantsByCity($cityId);
     }
 }

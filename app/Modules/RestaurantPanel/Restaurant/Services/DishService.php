@@ -3,6 +3,7 @@
 namespace App\Modules\RestaurantPanel\Restaurant\Services;
 
 use App\Modules\RestaurantPanel\Restaurant\Actions\CreateDishAction;
+use App\Modules\RestaurantPanel\Restaurant\Actions\UpdateDishAction;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\DishRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\RestaurantRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\DTOs\DishData;
@@ -22,6 +23,7 @@ class DishService
         RestaurantRepoInterface $restaurantRepo,
         protected DishRepoInterface $dishRepo,
         protected StorageService $storageService,
+        protected UpdateDishAction $updateDishAction,
     ){
         $this->setRestaurantRepo($restaurantRepo);
     }
@@ -46,10 +48,10 @@ class DishService
     public function update(Dish $dish, DishData $data): void
     {
         DB::transaction(function () use ($dish, $data) {
-            $restaurant = $this->getRestaurant();
             if ($data->image instanceof UploadedFile) {
                 $data->image = $this->storageService->update($data->image, $dish->image, 'dishes');
             }
+            $this->updateDishAction->execute($dish, $data);
         });
     }
 

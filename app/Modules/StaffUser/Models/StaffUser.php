@@ -3,6 +3,7 @@
 namespace App\Modules\StaffUser\Models;
 
 use App\Modules\Admin\Restaurants\Models\Restaurant;
+use App\Modules\StaffUser\Enums\RolesEnum;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -42,5 +43,10 @@ class StaffUser extends Authenticatable
     public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function isOwner(): bool
+    {
+        return $this->role?->name === RolesEnum::Owner->value;
     }
 }

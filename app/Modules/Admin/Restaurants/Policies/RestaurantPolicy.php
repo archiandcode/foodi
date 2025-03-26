@@ -38,7 +38,7 @@ class RestaurantPolicy
         return $this->isAdmin($user);
     }
 
-    public function own(StaffUser $user, Restaurant $restaurant): bool
+    public function own(StaffUser $user): bool
     {
         return $this->isOwner($user);
     }

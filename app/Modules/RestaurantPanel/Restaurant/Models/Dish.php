@@ -26,6 +26,8 @@ class Dish extends Model
         'menu_category_id',
     ];
 
+    protected $appends = ['image_url'];
+
     protected $casts = [
         'is_available' => 'boolean',
         'price' => 'float',
@@ -39,5 +41,10 @@ class Dish extends Model
     public function menuCategory(): BelongsTo
     {
         return $this->belongsTo(MenuCategory::class);
+    }
+
+    public function getImageUrlAttribute(): string
+    {
+        return $this->image ? asset('storage/' . $this->image) : asset('no_dish_image.png');
     }
 }

@@ -16,6 +16,12 @@
                     />
                 </div>
             </div>
+
+            <div v-if="loading" class="text-center mt-4">
+                <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Загрузка...</span>
+                </div>
+            </div>
         </div>
     </section>
 </template>
@@ -30,23 +36,38 @@ export default {
     data() {
         return {
             restaurants: [],
+            loading: true,
         };
     },
     mounted() {
-        this.fetchRestaurants();
+        this.waitForCityAndFetch();
     },
     methods: {
-        async fetchRestaurants() {
-            try {
+        waitForCityAndFetch() {
+            const checkInterval = 100;
+
+            const interval = setInterval(() => {
                 const cityId = localStorage.getItem('selectedCity');
+
+                if (cityId) {
+                    clearInterval(interval);
+                    this.fetchRestaurants(cityId);
+                }
+            }, checkInterval);
+        },
+
+        async fetchRestaurants(cityId) {
+            try {
                 const response = await axios.get('/restaurants', {
                     params: { cityId }
                 });
                 this.restaurants = response.data;
             } catch (error) {
                 console.error('Ошибка при загрузке ресторанов:', error);
+            } finally {
+                this.loading = false;
             }
-        },
-    },
+        }
+    }
 };
 </script>

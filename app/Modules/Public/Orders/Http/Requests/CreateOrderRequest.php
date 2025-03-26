@@ -14,11 +14,16 @@ class CreateOrderRequest extends FormRequest
             'total_price' => 'required|numeric|min:0',
 
             'dishes' => 'required|array|min:1',
-
             'dishes.*.dish_id' => 'required|integer|exists:dishes,id',
             'dishes.*.quantity' => 'required|integer|min:1',
             'dishes.*.price' => 'required|numeric|min:0',
             'dishes.*.total' => 'required|numeric|min:0',
+
+            'address' => 'required|array',
+            'address.note' => 'nullable|string',
+            'address.latitude' => 'required|numeric|between:-90,90',
+            'address.longitude' => 'required|numeric|between:-180,180',
+            'address.city_id' => 'required|integer|exists:cities,id',
         ];
     }
 

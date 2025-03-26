@@ -39,7 +39,7 @@ class UserAuthController extends Controller
     public function register(RegisterRequest $request): RedirectResponse
     {
         $this->service->register($request->getData());
-        return redirect()->intended('/');
+        return redirect('/');
     }
 
     public function logout(): RedirectResponse

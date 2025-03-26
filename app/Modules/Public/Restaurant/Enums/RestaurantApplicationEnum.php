@@ -8,7 +8,7 @@ enum RestaurantApplicationEnum: string
     case Approved = 'approved';
     case REJECTED = 'rejected';
 
-    public function labels(): array
+    public function labels(): string
     {
         return match ($this) {
             self::PENDING => __('В ожидании'),

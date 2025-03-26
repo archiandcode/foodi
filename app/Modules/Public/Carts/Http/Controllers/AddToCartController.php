@@ -49,4 +49,11 @@ class AddToCartController extends Controller
         ]);
     }
 
+    public function clear(): JsonResponse
+    {
+        $this->service->clear();
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }

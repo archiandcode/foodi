@@ -11,66 +11,63 @@
             </button>
         </div>
 
-        <div v-if="cartItems.length === 0" class="text-center mt-5">
-            <img
-                src="https://avatars.mds.yandex.net/get-bunker/994123/d04c085fae5bf3b50f6a912a6190f94df21adaa4/orig"
-                alt="Empty"
-                width="60"
-            />
+        <div v-if="cartItems.length === 0" class="text-center mt-5 flex-grow-1 d-flex align-items-center justify-content-center">
             <p class="mt-2">В вашей корзине пока пусто</p>
         </div>
 
-        <div v-else>
-            <template v-for="item in cartItems" :key="item.dish_id">
-                <div
-                    v-if="item.dish"
-                    class="d-flex justify-content-between align-items-center mb-3"
-                >
-                    <div class="d-flex align-items-start gap-2">
-                        <img
-                            :src="fullImage(item.dish.image)"
-                            alt=""
-                            width="50"
-                            class="rounded"
-                        />
-                        <div>
-                            <strong>{{ item.dish.name }}</strong>
-                            <div class="text-muted small">
-                                {{ item.dish.price }} ₸
+        <div v-else class="cart-body">
+            <div class="dish-cart-items">
+                <template v-for="item in cartItems" :key="item.dish_id">
+                    <div
+                        v-if="item.dish"
+                        class="d-flex justify-content-between align-items-center mb-3"
+                    >
+                        <div class="d-flex align-items-start gap-2">
+                            <img
+                                :src="item.dish.image_url"
+                                alt=""
+                                width="50"
+                                class="rounded"
+                            />
+                            <div>
+                                <strong>{{ item.dish.name }}</strong>
+                                <div class="text-muted small">
+                                    {{ item.dish.price }} ₸
+                                </div>
                             </div>
                         </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <button
+                                class="btn btn-sm px-2"
+                                @click="$emit('decrement', item.dish.id)"
+                            >
+                                −
+                            </button>
+                            <span>{{ item.quantity }}</span>
+                            <button
+                                class="btn btn-sm px-2"
+                                @click="$emit('increment', item.dish.id)"
+                            >
+                                ＋
+                            </button>
+                        </div>
                     </div>
-                    <div class="d-flex align-items-center gap-2">
-                        <button
-                            class="btn btn-sm px-2"
-                            @click="$emit('decrement', item.dish.id)"
-                        >
-                            −
-                        </button>
-                        <span>{{ item.quantity }}</span>
-                        <button
-                            class="btn btn-sm px-2"
-                            @click="$emit('increment', item.dish.id)"
-                        >
-                            ＋
-                        </button>
-                    </div>
-                </div>
-            </template>
-
-            <div
-                class="d-flex justify-content-between align-items-center mt-4 fw-bold fs-5"
-            >
-                <span>Итого:</span>
-                <span>{{ totalPrice }} ₸</span>
+                </template>
             </div>
 
-            <a
-                href="/cart"
-                class="btn btn-warning w-100 mt-3 rounded-3 fw-semibold"
-            >
-                Далее
-            </a>
+            <div class="cart-footer pt-3 border-top">
+                <div class="d-flex justify-content-between align-items-center fw-bold fs-5">
+                    <span>Итого:</span>
+                    <span>{{ totalPrice }} ₸</span>
+                </div>
+
+                <a
+                    href="/cart"
+                    class="btn btn-warning w-100 mt-3 rounded-3 fw-semibold"
+                >
+                    Далее
+                </a>
+            </div>
         </div>
     </aside>
 </template>
@@ -83,6 +80,7 @@ export default {
             type: Array,
             default: () => [],
         },
+        csrf: String,
     },
     computed: {
         totalPrice() {
@@ -97,18 +95,34 @@ export default {
     methods: {
         clearCart() {
             this.$emit('clear');
-        },
-        fullImage(path) {
-            return path && path.startsWith('http') ? path : `/storage/${path}`;
-        },
+        }
     },
 };
 </script>
 
 <style scoped>
 .dish-cart {
-    width: 260px;
+    width: 400px;
+    height: 600px;
     top: 5.1rem;
-    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dish-cart-items {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 4px;
+}
+
+.cart-footer {
+    flex-shrink: 0;
 }
 </style>

@@ -14,6 +14,8 @@ use App\Modules\Admin\Restaurants\Repositories\ApplicationRepo;
 use App\Modules\Public\Restaurant\Models\RestaurantApplication;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\DishRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\MenuCategoryRepoInterface;
+use App\Modules\RestaurantPanel\Restaurant\Models\RestaurantAddress;
+use App\Modules\RestaurantPanel\Restaurant\Policies\AddressPolicy;
 use App\Modules\RestaurantPanel\Restaurant\Repositories\DishRepo;
 use App\Modules\RestaurantPanel\Restaurant\Repositories\MenuCategoryRepo;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\RestaurantRepoInterface;
@@ -37,5 +39,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Country::class, CountryPolicy::class);
         Gate::policy(Restaurant::class, RestaurantPolicy::class);
         Gate::policy(RestaurantApplication::class, ApplicationPolicy::class);
+        Gate::policy(RestaurantAddress::class, AddressPolicy::class);
     }
 }

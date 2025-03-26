@@ -14,5 +14,7 @@ class CreateOrderData extends Data
 
         #[DataCollectionOf(CreateOrderItemData::class)]
         public DataCollection $dishes,
+
+        public ?OrderAddressData $address,
     ) {}
 }

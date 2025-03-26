@@ -8,6 +8,7 @@ use App\Modules\Public\Carts\Actions\DeleteExistingCartAction;
 use App\Modules\Public\Carts\Contracts\CartRepoInterface;
 use App\Modules\Public\Carts\DTOs\CreateCartData;
 use App\Modules\Public\Carts\DTOs\CreateCartItemData;
+use App\Modules\Public\Carts\Models\Cart;
 use App\Modules\RestaurantPanel\Restaurant\Contracts\DishRepoInterface;
 use App\Modules\RestaurantPanel\Restaurant\Models\Dish;
 use App\Modules\Shared\Traits\InteractsWithAuthUse;
@@ -33,16 +34,12 @@ class CartService
 
         DB::transaction(function () use ($user, $dish) {
             $existingCart = $this->cartRepo->getFirstByUser($user);
-            info($existingCart);
-
             $this->deleteExistingCartAction->execute($existingCart, $dish);
 
             $cart = $this->createCartAction->execute(CreateCartData::from([
                 'user_id' => $user->id,
                 'restaurant_id' => $dish->restaurant_id,
             ]));
-
-            info($cart);
 
             $this->createCartItemAction->execute(CreateCartItemData::from([
                 'cart_id' => $cart->id,
@@ -51,5 +48,13 @@ class CartService
         });
 
         return $dish;
+    }
+
+    public function clear(): void
+    {
+        $cart = $this->cartRepo->getFirstByUser($this->user());
+        if ($cart) {
+            $cart->items()->delete();
+        }
     }
 }

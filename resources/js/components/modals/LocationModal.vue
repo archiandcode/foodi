@@ -56,7 +56,7 @@ export default {
                     keyboard: false
                 });
                 modal.show();
-                this.modalInstance = modal; // если всё-таки понадобится
+                this.modalInstance = modal;
             });
         }
     },
@@ -77,13 +77,26 @@ export default {
             }
         },
         saveAndClose() {
+            const selectedCountryObj = this.countries.find(c => c.id == this.selectedCountry);
+            const selectedCityObj = this.cities.find(c => c.id == this.selectedCity);
+
             localStorage.setItem('selectedCountry', this.selectedCountry);
             localStorage.setItem('selectedCity', this.selectedCity);
+
+            if (selectedCountryObj) {
+                localStorage.setItem('selectedCountryName', selectedCountryObj.name);
+            }
+            if (selectedCityObj) {
+                localStorage.setItem('selectedCityName', selectedCityObj.name);
+            }
+
+            window.dispatchEvent(new CustomEvent('location-updated'));
 
             const modalEl = document.getElementById('locationModal');
             const modal = bootstrap.Modal.getInstance(modalEl);
             modal?.hide();
         }
+
     }
 }
 </script>

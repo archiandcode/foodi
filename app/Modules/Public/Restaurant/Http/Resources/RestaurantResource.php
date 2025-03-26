@@ -16,7 +16,7 @@ class RestaurantResource extends JsonResource
             'slug' => $this->slug,
             'name' => $this->name,
             'description' => $this->description,
-            'banner_url' => $this->banner ? asset('storage/' . $this->banner) : null,
+            'banner_url' => $this->banner ? asset('storage/' . $this->banner) : asset('no_image.png'),
             'link' => route('restaurant.dishes', $this->slug)
         ];
     }

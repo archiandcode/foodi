@@ -5,6 +5,7 @@ namespace App\Modules\Public\Restaurant\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Public\Restaurant\Http\Requests\RestaurantApplicationRequest;
 use App\Modules\Public\Restaurant\Models\RestaurantApplication;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class RestaurantApplicationController extends Controller
@@ -14,10 +15,10 @@ class RestaurantApplicationController extends Controller
         return view('public.restaurant_application.create');
     }
 
-    public function store(RestaurantApplicationRequest $request)
+    public function store(RestaurantApplicationRequest $request): RedirectResponse
     {
-        RestaurantApplication::create($request->all());
-        notify()->success('Restaurant application created successfully!');
+        RestaurantApplication::query()->create($request->validated());
+        notify()->success('','Заявка успешно отправлено!');
         return redirect()->route('home');
     }
 }

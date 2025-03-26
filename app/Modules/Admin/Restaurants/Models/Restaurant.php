@@ -6,6 +6,7 @@ use App\Modules\RestaurantPanel\Restaurant\Models\Dish;
 use App\Modules\RestaurantPanel\Restaurant\Models\MenuCategory;
 use App\Modules\RestaurantPanel\Restaurant\Models\RestaurantAddress;
 use App\Modules\StaffUser\Models\StaffUser;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class Restaurant extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'slug',
         'name', 'description',
@@ -44,9 +47,8 @@ class Restaurant extends Model
 
         return $path
             ? asset('storage/' . $path)
-            : "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg";
+            : asset('no_image.png');
     }
-
 
     public function categories(): HasMany
     {

@@ -5,6 +5,8 @@ namespace App\Modules\RestaurantPanel\Restaurant\Models;
 use App\Modules\Admin\Location\Models\City;
 use App\Modules\Admin\Location\Models\Country;
 use App\Modules\Admin\Restaurants\Models\Restaurant;
+use Database\Factories\RestaurantAddressFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -22,6 +24,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 */
 class RestaurantAddress extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'restaurant_id',
         'country_id',

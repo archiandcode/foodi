@@ -21,7 +21,7 @@
 
     <div class="form-group">
         <label for="countrySelect">Страна</label>
-        <select id="countrySelect" name="country_id" class="form-control" required data-url="{{ route('api.cities.index') }}">
+        <select id="countrySelect" name="country_id" class="form-control" required data-url="{{ route('location.cities') }}">
             <option value="">-- {{__('Выберите страну')}} --</option>
         </select>
     </div>

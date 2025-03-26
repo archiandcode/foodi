@@ -13,13 +13,6 @@ class RestaurantService
         ]);
     }
 
-    public function reject(Restaurant $restaurant): void
-    {
-        $restaurant->update([
-            'status' => 'rejected',
-        ]);
-    }
-
     public function ban(Restaurant $restaurant): void
     {
         $restaurant->update([

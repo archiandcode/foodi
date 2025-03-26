@@ -2,22 +2,53 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Modules\Admin\Location\Models\Country;
+use App\Modules\Admin\Location\Models\City;
+use App\Modules\Admin\Restaurants\Models\Restaurant;
+use App\Modules\RestaurantPanel\Restaurant\Models\RestaurantAddress;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (Country::count() === 0 || City::count() === 0) {
+            $this->command->warn('Сначала посей таблицы countries и cities.');
+            return;
+        }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        for ($i = 0; $i < 500; $i++) {
+            $country = Country::inRandomOrder()->first();
+            $city = City::where('country_id', $country->id)->inRandomOrder()->first();
+
+            if (!$city) {
+                continue;
+            }
+
+            $name = fake()->unique()->company();
+            $restaurant = Restaurant::create([
+                'slug' => Str::slug($name) . '-' . Str::random(5),
+                'name' => $name,
+                'description' => fake()->sentence(),
+                'logo' => null,
+                'banner' => null,
+                'bin' => fake()->numerify('############'),
+                'website' => fake()->url(),
+                'is_active' => fake()->boolean(90),
+                'is_banned' => fake()->boolean(10),
+            ]);
+
+            RestaurantAddress::create([
+                'restaurant_id' => $restaurant->id,
+                'country_id' => $country->id,
+                'city_id' => $city->id,
+                'address' => fake()->streetAddress(),
+                'description' => fake()->optional()->sentence(),
+                'latitude' => fake()->latitude(),
+                'longitude' => fake()->longitude(),
+                'formatted_address' => fake()->address(),
+            ]);
+        }
     }
 }

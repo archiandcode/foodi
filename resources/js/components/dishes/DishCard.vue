@@ -1,6 +1,6 @@
 <template>
     <div class="p-3 bg-white rounded-4 h-100 d-flex flex-column justify-content-between">
-        <img :src="fullImage" class="mb-3 w-100 rounded-3" style="height: 140px; object-fit: cover;" :alt="dish.name">
+        <img :src="dish.image_url" class="mb-3 w-100 rounded-3" style="height: 140px; object-fit: cover;" :alt="dish.name">
 
         <div>
             <h6>{{ dish.price }} ₸</h6>
@@ -13,7 +13,7 @@
                 @click="addToCart"
                 class="btn btn-outline-dark w-100"
             >
-                + Добавить
+                Добавить
             </button>
 
             <div v-else class="d-flex justify-content-between align-items-center px-3 py-2 rounded" style="background-color: #f1f1f1;">
@@ -39,9 +39,6 @@ export default {
     },
 
     computed: {
-        fullImage() {
-            return `/storage/${this.dish.image}`;
-        },
         quantity() {
             const item = this.cartItems.find(i => i.dish.id === this.dish.id);
             return item ? item.quantity : 0;
